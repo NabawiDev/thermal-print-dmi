@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>Thermal Receipt</title>
+<style type="text/css">
+  body {
+    font-family: monospace;
+    font-size: 12px;
+    width: 58mm; /* Standard thermal paper width */
+    height: 210mm;
+    margin: auto;
+    padding: 10px;
+  }
+  .logo {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .logo img {
+    width: 100px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .info {
+    margin-bottom: 20px;
+  }
+  .item {
+    margin-bottom: 5px;
+  }
+  .total {
+    text-align: right;
+    margin-top: 20px;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  hr {
+    border-top: 1px dashed #000;
+  }
+  .item-line {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Print-specific styles */
+  @media print {
+    @page {
+      margin: 0;
+      size: 80mm 297mm; /* Standard thermal paper size */
+    }
+    body {
+      width: 72mm; /* Accounting for printer margins */
+    }
+    .no-print {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+function printReceipt() {
+  // Update date and time
+  document.getElementById('date').innerHTML = new Date().toLocaleDateString('id-ID', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+  document.getElementById('time').innerHTML = new Date().toLocaleTimeString('id-ID');
+  
+  // Print
+  window.print();
+}
+</script>
+</head>
+<body>
+<div class="logo">
+  <img src="dmi-logo.png" alt="DMI Logo">
+</div>
+
+<div class="header">
+  Jl. D I Panjaitan no. 34 <br> Kebun Handil - Jambi
+</div>
+
+<div class="info">
+  Tanggal : <span id="date">02 Januari 2025</span>&nbsp;&nbsp;&nbsp;<span id="time">13:29:42</span><br>
+  Faktur  : XXXXXXXX<br>
+  Kepada  : Albert Motor<br>
+  Kasir   : Albert [Nama User]
+</div>
+
+<hr>
+
+<div class="item">
+  [KODE BARANG]&nbsp;&nbsp;&nbsp;[NAMA BARANG]<br>
+  [QTY] x [HARGA DASAR]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TOTAL NETT]<br>
+  Disc. [Besar %]
+</div>
+
+<div class="item">
+  91009-KVB-903&nbsp;&nbsp;&nbsp;BRG BALL RADIAL 60/22 UU<br>
+  <div class="item-line">
+    <span>10 pcs x 46.200</span>
+    <span>392.700</span>
+  </div>
+  Disc. 15%
+</div>
+
+<hr>
+
+<div class="total">
+  Total : 392.700<br>
+  Bayar : 400.000<br>
+  Kembali : 7.300
+</div>
+
+<div class="footer">
+  *Barang yang sudah dibayar tidak bisa diretur/kembalikan<br>
+  Terima Kasih<br>
+  Barang Ori Harga Aman di Hati<br>
+  WA 08228147896
+</div>
+
+<!-- Tombol print (hanya muncul di layar, tidak di print) -->
+<div class="no-print" style="text-align: center; margin-top: 20px;">
+  <button onclick="printReceipt()">Print Receipt</button>
+</div>
+
+</body>
+</html>
+
